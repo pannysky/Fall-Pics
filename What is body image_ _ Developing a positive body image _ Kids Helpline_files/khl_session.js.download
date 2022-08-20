@@ -1,0 +1,30 @@
+jQuery(document).ready(function(){
+
+	// Remember the url parameters on first hit in the browser session storage 
+	// for use elsewhere if we need them
+	khl_save_referrer_parms();
+
+});
+
+/**
+ * Remember any paramters passed by the referrer to the site
+ * 
+ * @returns
+ */
+function khl_save_referrer_parms() {
+	// no local storage - get out
+	if (typeof Storage == "undefined") {
+		return false;
+	}
+	
+	// Only save them if we have not already
+	if (!sessionStorage.getItem("khl_referrer_parms")) {
+		var parms = "none";
+		if (window.location.search != "") {
+			parms = window.location.search;
+		}
+
+		sessionStorage.setItem("khl_referrer_parms", parms)
+	}
+	
+}
